@@ -36,7 +36,7 @@ Transform:
   - {fileID: 7981515799331101926}
   - {fileID: 5873137862978083349}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6026193313161689723
 MeshFilter:
@@ -151,11 +151,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 5105038303963012843}
   maxSpeed: 10
-  gravity: -30
+  gravity: -20
   jumpHeight: 3
   velocity: {x: 0, y: 0, z: 0}
   groundPoint: {fileID: 5873137862978083349}
-  groundRadius: 0.5
+  groundRadius: 0.47
   groundMask:
     serializedVersion: 2
     m_Bits: 64
