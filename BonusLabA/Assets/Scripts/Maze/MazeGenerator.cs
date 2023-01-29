@@ -8,13 +8,13 @@ public class MazeGenerator : MonoBehaviour
     public int mazeWidth = 8;
     public int mazeDepth = 8;
 
-    public Transform tileParent;
+    private Transform tileParent;
 
     private GameObject[] tileArray;
     private List<GameObject> tileList;
     public GameObject startTile;
     public GameObject endTile;
-
+    private GameObject playerRef;
 
 
 
@@ -23,6 +23,8 @@ public class MazeGenerator : MonoBehaviour
         startTile = Resources.Load<GameObject>("Tiles/StartTile");
         endTile = Resources.Load<GameObject>("Tiles/EndTile");
 
+        tileParent = GameObject.Find("[TILES]").transform;
+
         tileArray = new GameObject[4];
         tileArray[0] = Resources.Load<GameObject>("Tiles/BarnTile");
         tileArray[1] = Resources.Load<GameObject>("Tiles/FactoryTile");
@@ -30,12 +32,14 @@ public class MazeGenerator : MonoBehaviour
         tileArray[3] = Resources.Load<GameObject>("Tiles/EmptyTile");
 
         tileList = new List<GameObject>();
-         
+
+        playerRef = Resources.Load<GameObject>("Player/Player");
     }
 
     private void Start()
     {
         BuildTileList();
+        SpawnPlayer(new Vector3(0,0,0), new Quaternion(0,0,0,0));
     }
     private void BuildTileList()
     {
@@ -50,5 +54,10 @@ public class MazeGenerator : MonoBehaviour
 
             }
         }
+    }
+
+    private void SpawnPlayer(Vector3 spawnPos, Quaternion spawnRot)
+    {
+        Instantiate(playerRef, spawnPos, spawnRot);
     }
 }
