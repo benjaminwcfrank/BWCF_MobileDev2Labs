@@ -12,16 +12,18 @@ public class MazeGenerator : MonoBehaviour
 
     private GameObject[] tileArray;
     private List<GameObject> tileList;
-    public GameObject startTile;
-    public GameObject endTile;
-    private GameObject playerRef;
+    private GameObject startTilePrefab;
+    private GameObject startTileRef;
+    private GameObject endTilePrefab;
+    private GameObject endTileRef;
+    private GameObject playerPrefab;
 
 
 
     private void Awake()
     {
-        startTile = Resources.Load<GameObject>("Tiles/StartTile");
-        endTile = Resources.Load<GameObject>("Tiles/EndTile");
+        startTilePrefab = Resources.Load<GameObject>("Tiles/StartTile");
+        endTilePrefab = Resources.Load<GameObject>("Tiles/EndTile");
 
         tileParent = GameObject.Find("[TILES]").transform;
 
@@ -33,13 +35,13 @@ public class MazeGenerator : MonoBehaviour
 
         tileList = new List<GameObject>();
 
-        playerRef = Resources.Load<GameObject>("Player/Player");
+        playerPrefab = Resources.Load<GameObject>("Player/Player");
     }
 
     private void Start()
     {
         BuildTileList();
-        SpawnPlayer(new Vector3(0,0,0), new Quaternion(0,0,0,0));
+        Invoke("SpawnPlayer", 0.1f);
     }
     private void BuildTileList()
     {
@@ -54,10 +56,29 @@ public class MazeGenerator : MonoBehaviour
 
             }
         }
+
+
+        
+        startTileRef = BuildCustomTile(startTilePrefab, 0, Random.Range(0, mazeWidth + 1));
+        endTileRef = BuildCustomTile(endTilePrefab, Random.Range(1, mazeDepth + 1), Random.Range(1, mazeWidth + 1));
     }
 
-    private void SpawnPlayer(Vector3 spawnPos, Quaternion spawnRot)
+
+
+    private void SpawnPlayer()
     {
-        Instantiate(playerRef, spawnPos, spawnRot);
+        Instantiate(playerPrefab, startTileRef.transform.position + new Vector3(0f, 5f, 0f), startTileRef.transform.rotation);
     }
+
+    private GameObject BuildCustomTile(GameObject newTilePrefab, int colPos, int rowPos)
+    {
+
+
+        var newTileIndex = (rowPos * mazeDepth) + colPos;
+        var newTileTransform = tileList[newTileIndex].transform;
+        Destroy(tileList[newTileIndex]);
+        tileList[newTileIndex] = Instantiate(newTilePrefab, newTileTransform.position, newTileTransform.rotation, tileParent);
+        return tileList[newTileIndex];
+    }
+
 }
