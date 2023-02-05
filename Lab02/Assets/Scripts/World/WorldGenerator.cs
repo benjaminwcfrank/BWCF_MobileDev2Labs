@@ -10,7 +10,9 @@ public class WorldGenerator : MonoBehaviour
     [Header("World properties")]
     [Range(1, 128)]
     public int height = 1;
+    [Range(1, 128)]
     public int width = 1;
+    [Range(1, 128)]
     public int depth = 1;
 
     [Header("Scaling Properties")]
@@ -33,13 +35,21 @@ public class WorldGenerator : MonoBehaviour
 
     private Queue<GameObject> pool;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         grid = new List<GameObject>();
 
         BuildPool();
         Generate();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        //grid = new List<GameObject>();
+
+        //BuildPool();
+        //Generate();
     }
     private void CreateTile()
     {
@@ -54,7 +64,7 @@ public class WorldGenerator : MonoBehaviour
     {
         pool = new Queue<GameObject>();
 
-        for (int i = 0; i < 80000; i++)
+        for (int i = 0; i < 10000; i++)
         {
             CreateTile();
         }
@@ -85,10 +95,10 @@ public class WorldGenerator : MonoBehaviour
     private void Generate()
     {
         Init();
-        Regenerate();
-        Invoke("RemoveInternalTiles", 0.1f);
-        Invoke("CombineMeshes", 0.2f);
-        Invoke("ResetScene", 0.2f);
+        ResetScene();
+        Invoke("Regenerate", 0.3f);
+        Invoke("RemoveInternalTiles", 0.5f);
+        Invoke("CombineMeshes", 0.7f);
         PositionPlayer();
     }
 
@@ -96,10 +106,10 @@ public class WorldGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(height != startHeight || depth != startDepth || width != startWidth || min != startMin || max != startMax)
-        {
-            Generate();
-        }
+        //if(height != startHeight || depth != startDepth || width != startWidth || min != startMin || max != startMax)
+        //{
+        //    Generate();
+        //}
 
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -129,7 +139,7 @@ public class WorldGenerator : MonoBehaviour
             {
                 for (int x = 0; x < width; x++)
                 {
-                    var perlinVal = Mathf.PerlinNoise((x + offsetX) / rand, ((z + offsetZ) / rand) * depth * 0.5f);
+                    var perlinVal = Mathf.PerlinNoise((x + offsetX) / rand, (z + offsetZ) / rand) * depth * 1.5f;
 
                     if( y < perlinVal)
                     {
@@ -145,12 +155,26 @@ public class WorldGenerator : MonoBehaviour
 
     private void ResetScene()
     {
-        var size = grid.Count;
-        for (int i = 0; i < size; i++)
+        foreach (var tile in grid)
         {
-            ReleaseTile(grid[i]);
+            ReleaseTile(tile);
         }
         grid.Clear();
+
+       //// var size = grid.Count;
+       // for (int i = 0; i < grid.Count; i++)
+       // {
+       //     if(grid[i] != null)
+       //         ReleaseTile(grid[i]);
+       // }
+
+       // grid.Clear();     //WHY DOES CLEAR GIVE ME ERRORS????
+
+        //for (int i = 0; i < grid.Count; i++)
+        //{
+        //    grid.RemoveAt(i);
+        //}
+
     }
 
     private void RemoveInternalTiles()
@@ -163,13 +187,13 @@ public class WorldGenerator : MonoBehaviour
             int collisionCounter = 0;
             for (int i = 0; i < normalArray.Length; i++)
             {
-                if(Physics.Raycast(tile.transform.position, normalArray[i], tile.transform.localScale.magnitude * 0.3f))
+                if(Physics.Raycast(tile.transform.position, normalArray[i], tile.transform.localScale.magnitude * 0.5f))
                 {
                     collisionCounter++;
                 }
             }
 
-            if (collisionCounter > 5)
+            if (collisionCounter == 6)
                 tilesToRemove.Add(tile);
         }
     
@@ -202,13 +226,11 @@ public class WorldGenerator : MonoBehaviour
 
         CombineInstance[] combine = new CombineInstance[meshFilters.Count];
 
-        int i = 0;
 
-        while (i < meshFilters.Count)
+        for (int i = 0; i < meshFilters.Count; i++)
         {
             combine[i].mesh = meshFilters[i].sharedMesh;
             combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
-            i++;
         }
 
         meshFilter.mesh.CombineMeshes(combine);
@@ -217,7 +239,7 @@ public class WorldGenerator : MonoBehaviour
     private void PositionPlayer()
     {
         playerPrefab.GetComponent<CharacterController>().enabled = false;
-        playerPrefab.transform.position = new Vector3(width * 0.5f, height * 0.5f, depth * 0.5f);
+        playerPrefab.transform.position = new Vector3(width * 0.5f, height * 2, depth * 0.5f);
         playerPrefab.GetComponent<CharacterController>().enabled = true;
 
     }

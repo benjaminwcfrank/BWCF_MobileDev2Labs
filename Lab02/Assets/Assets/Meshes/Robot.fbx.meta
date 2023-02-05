@@ -8,32 +8,32 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: ArmMat
-    second: {fileID: 2100000, guid: 6d38a6d2de397c447a0b69cc683fa7a8, type: 2}
+    second: {fileID: 2100000, guid: b13c05aee52beea439f48bd8e6eef2d2, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: BodyMat
-    second: {fileID: 2100000, guid: d3affc2903cea034b92dd068af473964, type: 2}
+    second: {fileID: 2100000, guid: 3e332a06d341c27458ad4cec974cd073, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: EyeMat
-    second: {fileID: 2100000, guid: cd9e1c9b5c05bb44f8a99ca024eb2ead, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: FaceMat
-    second: {fileID: 2100000, guid: 6f57fc3d1bbba4d4d803cd4ab0bf3eae, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: HeadMat
     second: {fileID: 2100000, guid: e5a691a2d36ad3d45a310581d49e38fd, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: FaceMat
+    second: {fileID: 2100000, guid: 7b900078943e040408e541e0f1084189, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HeadMat
+    second: {fileID: 2100000, guid: 3e332a06d341c27458ad4cec974cd073, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: RubberMat
-    second: {fileID: 2100000, guid: 881556704a0d65e4d9c76ef02ba2aeac, type: 2}
+    second: {fileID: 2100000, guid: 0ec7e13c79f01d849b074301663170c2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
