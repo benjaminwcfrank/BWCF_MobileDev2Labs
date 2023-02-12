@@ -5,6 +5,11 @@ using UnityEngine.UIElements;
 
 public class CoinMgr : MonoBehaviour
 {
+    [Header("Coin Transform Visuals")]
+    public float bobScaling = 0.5f;
+    public float spinSpeed = 50f;
+    public AnimationCurve bobCurve;
+
     private Vector3 startPos;
 
     // Start is called before the first frame update
@@ -16,7 +21,7 @@ public class CoinMgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time, 0.5f) + startPos.y , transform.position.z);
-        transform.RotateAround(transform.position, Vector3.up, 50 * Time.deltaTime);
+        transform.position = new Vector3(transform.position.x, (bobCurve.Evaluate((Time.time % bobCurve.length)) * bobScaling) + startPos.y , transform.position.z);
+        transform.RotateAround(transform.position, Vector3.up, spinSpeed * Time.deltaTime);
     }
 }
