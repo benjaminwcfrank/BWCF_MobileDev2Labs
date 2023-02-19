@@ -49,6 +49,13 @@ public class PlayerBehaviour : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+
+
+
+        if (Input.GetButton("testDamage"))
+        {
+            GetComponent<HealthbarController>().TakeDamage(5);
+        }
     }
 
     void OnDrawGizmos()

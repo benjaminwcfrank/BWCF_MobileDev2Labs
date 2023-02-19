@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9161812260609569736}
   - component: {fileID: 5105038303963012843}
   - component: {fileID: 7338549290652647731}
+  - component: {fileID: 7940136084521988127}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   - {fileID: 7981515799331101926}
   - {fileID: 5873137862978083349}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6026193313161689723
 MeshFilter:
@@ -160,6 +161,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   isGrounded: 0
+--- !u!114 &7940136084521988127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4118326662440206412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b17ff9adb543ab244b6997f23a413277, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthValue: 100
+  healthBarRef: {fileID: 0}
 --- !u!1 &6285340719084573983
 GameObject:
   m_ObjectHideFlags: 0
