@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 [System.Serializable]
 public class HealthbarController : MonoBehaviour
@@ -12,6 +13,8 @@ public class HealthbarController : MonoBehaviour
 
     [Header("Display Properties")]
     public Slider healthBarRef;
+
+    public TextMeshProUGUI healthText;
 
 
     // Start is called before the first frame update
@@ -23,6 +26,7 @@ public class HealthbarController : MonoBehaviour
 
     public void ResetHealth()
     {
+        healthText.text = healthValue.ToString();
         healthBarRef.value = 100;
         UpdateHealthValue();
     }
@@ -48,5 +52,6 @@ public class HealthbarController : MonoBehaviour
     private void UpdateHealthValue()
     {
         healthValue = (int)healthBarRef.value;
+        healthText.text = healthValue.ToString();
     }
 }

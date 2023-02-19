@@ -52,7 +52,7 @@ public class PlayerBehaviour : MonoBehaviour
 
 
 
-        if (Input.GetButton("testDamage"))
+        if (Input.GetButtonDown("testDamage"))
         {
             GetComponent<HealthbarController>().TakeDamage(5);
         }
