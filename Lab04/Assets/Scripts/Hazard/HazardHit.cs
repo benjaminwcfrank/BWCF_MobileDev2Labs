@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class HazardHit : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int damageToDeal = 5;
+
+
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.tag != "Player")
+                return;
+
+        collision.gameObject.GetComponent<HealthbarController>().TakeDamage(damageToDeal);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
