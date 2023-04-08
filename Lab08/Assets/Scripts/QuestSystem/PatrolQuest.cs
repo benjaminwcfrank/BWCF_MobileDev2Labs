@@ -5,23 +5,25 @@ using UnityEngine;
 [System.Serializable]
 public class PatrolQuest : Quest
 {
+    [Header("PatrolQuest Patrol Points")]
     public GameObject target;
     public List<Transform> patrolPoints;
     public Transform startLocation;
 
 
-    public PatrolQuest(string id, string name, LocationTask rootTask, ProgressState startState = ProgressState.NOT_STARTED) : base(id, name, rootTask, startState)
+    public PatrolQuest(string id, string name, LocationTask rootTask, List<Transform> patrolPointsPassed, ProgressState startState = ProgressState.NOT_STARTED) : base(id, name, rootTask, startState)
     {
         
         target = rootTask.target;
         startLocation = rootTask.location;
-        BuildQuest();
+        patrolPoints = patrolPointsPassed;
+
+        Debug.Log(patrolPoints.Count);
     }
 
     public override void BuildQuest()
     {
 
-        patrolPoints = new List<Transform>();
 
         //add as many location tasks as there are transforms in PatrolPoints
         for (int i = 0; i < patrolPoints.Count; i++)

@@ -19,7 +19,7 @@ public class Quest
         questState = state;
         tasks = new List<Task> { rootTask }; //create an list container of tasks containing only rootTask
         currentTask = rootTask;
-        BuildQuest();
+        //BuildQuest();
     }
 
     public virtual void BuildQuest() { }

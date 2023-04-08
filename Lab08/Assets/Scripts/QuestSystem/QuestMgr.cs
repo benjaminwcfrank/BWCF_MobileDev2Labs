@@ -8,16 +8,17 @@ public class QuestMgr : MonoBehaviour
     public GameObject playerRef;
     public Transform startLocation;
     public List<Quest> quests;
-    public Quest currentQuest;
+    public PatrolQuest currentQuest;
+    public List<Transform> patrolPath;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentQuest = new PatrolQuest("Patrol1", "Patrol the Map", new LocationTask("task1", "Start Location", null, null, playerRef, startLocation));
+        currentQuest = new PatrolQuest("Patrol1", "Patrol the Map", new LocationTask("task1", "Start Location", null, null, playerRef, startLocation), patrolPath);
 
         quests.Add(currentQuest);
         currentQuest.questState = ProgressState.IN_PROGRESS;
-
+        currentQuest.BuildQuest();
     }
 
 
