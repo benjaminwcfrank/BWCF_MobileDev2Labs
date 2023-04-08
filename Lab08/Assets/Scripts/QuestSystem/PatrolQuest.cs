@@ -18,7 +18,6 @@ public class PatrolQuest : Quest
         startLocation = rootTask.location;
         patrolPoints = patrolPointsPassed;
 
-        Debug.Log(patrolPoints.Count);
     }
 
     public override void BuildQuest()
