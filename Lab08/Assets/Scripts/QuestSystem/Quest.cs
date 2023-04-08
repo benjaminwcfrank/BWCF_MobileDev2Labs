@@ -9,14 +9,16 @@ public class Quest
     public string questID;
     public ProgressState questState;
     public List<Task> tasks;
+    public Task currentTask;
 
     protected Quest(string id, string name, Task rootTask, ProgressState state = ProgressState.NOT_STARTED)
     {
-        tasks = new List<Task>(); //create an empty collection container of tasks
-        tasks.Add(rootTask);
+
         questID = id;
         questName = name;
         questState = state;
+        tasks = new List<Task> { rootTask }; //create an list container of tasks containing only rootTask
+        currentTask = rootTask;
         BuildQuest();
     }
 

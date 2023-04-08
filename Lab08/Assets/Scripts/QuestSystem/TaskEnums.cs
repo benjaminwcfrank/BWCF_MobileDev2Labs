@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public enum ProgressState
 {
     ABANDONED,
@@ -12,6 +13,7 @@ public enum ProgressState
     NOT_STARTED,
 }
 
+[System.Serializable]
 public struct ProgressStateTexts
 {
 

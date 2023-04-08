@@ -7,6 +7,7 @@ public class LocationTask : Task
 {
     public GameObject target;
     public Transform location;
+    public float conditionRadius = 5.0f;
 
     public LocationTask(string id, string name, Task prev, Task next, GameObject taskTarget, Transform taskLocation, ProgressState startState = ProgressState.NOT_STARTED)
         : base(id, name, prev, next, startState)
@@ -17,6 +18,6 @@ public class LocationTask : Task
     
     public override bool Condition()
     {
-        return Vector3.Distance(target.transform.position, location.position) < 0.5f;
+        return Vector3.Distance(target.transform.position, location.position) < conditionRadius;
     }
 }

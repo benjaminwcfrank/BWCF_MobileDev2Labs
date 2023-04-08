@@ -7,7 +7,7 @@ public class Task
 {
     [Header("Task Properties")]
     public string taskID;
-    ProgressState state;
+    public ProgressState state;
     public Task nextTask;
     public Task prevTask;
     public ProgressStateTexts texts;
@@ -19,6 +19,7 @@ public class Task
         taskID = id;
         prevTask = prev;
         nextTask = next;
+        state = startState;
 
         if(prevTask != null && prevTask.state != ProgressState.COMPLETED)
         {

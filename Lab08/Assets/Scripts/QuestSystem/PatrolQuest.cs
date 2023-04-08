@@ -10,25 +10,30 @@ public class PatrolQuest : Quest
     public Transform startLocation;
 
 
-    public PatrolQuest(string id, string name, Task rootTask, GameObject questTarget, Transform location) : base(id, name, rootTask)
+    public PatrolQuest(string id, string name, LocationTask rootTask, ProgressState startState = ProgressState.NOT_STARTED) : base(id, name, rootTask, startState)
     {
-        target = questTarget;
-        startLocation = location;
+        
+        target = rootTask.target;
+        startLocation = rootTask.location;
         BuildQuest();
     }
 
     public override void BuildQuest()
     {
-        int count = 0;
-        foreach (var location in patrolPoints)
+
+        patrolPoints = new List<Transform>();
+
+        //add as many location tasks as there are transforms in PatrolPoints
+        for (int i = 0; i < patrolPoints.Count; i++)
         {
-            tasks.Add(new LocationTask(count.ToString(), "Location " + count.ToString(), tasks[count], null, target, startLocation));
-            count++;
+            tasks.Add(new LocationTask("LocTask+ " + i.ToString(), "Loc+ " + i.ToString(), (i > 0) ? tasks[i - 1] : null, null, target, patrolPoints[i]));
         }
 
-        for (var i = 0; i < tasks.Count; i++)
+
+        //Link each task's nextTask together
+        for (int i = 0; i < tasks.Count; i++)
         {
-            tasks[i].nextTask = i < tasks.Count - 1 ? tasks[i + 1] : null;
+            tasks[i].nextTask = (i < tasks.Count - 1) ? tasks[i + 1] : null;
         }
 
     }
